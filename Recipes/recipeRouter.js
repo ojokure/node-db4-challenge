@@ -16,12 +16,22 @@ recipeRouter.get("/", (req, res) => {
 
 recipeRouter.get("/:id/shoppingList", (req, res) => {
   Recipes.getShoppingList(req.params.id)
-    .then(instruction => {
-      res.status(200).json(instruction)
+    .then(list => {
+      res.status(200).json(list)
     })
     .catch(err => {
-      res.status(500).json({ message: "Failed to get an instruction" });
+      res.status(500).json({ message: "Failed to get the lists" });
     });
 });
+
+recipeRouter.get("/:id/instructions", (req, res) => {
+    Recipes.getInstructions(req.params.id)
+      .then(instruction => {
+        res.status(200).json(instruction)
+      })
+      .catch(err => {
+        res.status(500).json({ message: "Failed to get an instruction" });
+      });
+  });
 
 module.exports = recipeRouter;

@@ -2,7 +2,8 @@ const db = require("../data/dbConfig");
 
 module.exports = {
   getRecipes,
-  getShoppingList
+  getShoppingList,
+  getInstructions
 };
 
 function getRecipes() {
@@ -15,6 +16,18 @@ function getShoppingList(recipe_id) {
   .join("ingredients as i","c.ingredient_id","=","i.id")
   .where({"r.id" : recipe_id})
 }
+
+
+function getInstructions(recipe_id) {
+  return db.select("steps.*").from("recipes")
+  .join("steps","recipes.id","=","steps.recipe_id")
+  .where({"recipes.id" : recipe_id})
+}
+
+
+// select steps.* from recipes
+// join steps on recipes.id = steps.recipe_id
+// order by recipes.id;
 
 // function findSteps(schemeId) {
 //   return db("schemes as s")
