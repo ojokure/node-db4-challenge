@@ -5,5 +5,5 @@ module.exports = {
 };
 
 function getShoppingList() {
-  return db("schemes");
+  return db("");
 }
